@@ -8,18 +8,10 @@ module.exports = {
     sourceType: 'module'
   },
   env: {
-    browser: true,
-    node: true
+    node: true,
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/recommended' // or 'plugin:vue/base'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'html'
-  ],
+  extends: 'eslint:recommended',
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions
