@@ -96,4 +96,4 @@ Perhaps market is simplified and price increases/decreases based on the supply a
 
 - [ ] Use knex migrations
 - [ ] Use one of the frameworks for css
-- [ ] Use GraphQL api
+- [ ] Use GraphQL api [https://github.com/apollographql/apollo-server]
