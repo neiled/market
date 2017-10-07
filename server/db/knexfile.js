@@ -4,6 +4,7 @@ if (!process.env.NODE_ENV) { throw new Error('NODE_ENV not set') }
 
 require('dotenv').config()
 
+
 module.exports = {
     testing: {
         client: 'pg',

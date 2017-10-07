@@ -2,6 +2,7 @@ import jsonwebtoken from 'jsonwebtoken'
 import dateAddMonths from 'date-fns/add_months'
 import uuid from 'uuid/v4'
 import bcrypt from 'bcrypt'
+import db from '../db/db'
 
 class UserController {
     constructor() {}
