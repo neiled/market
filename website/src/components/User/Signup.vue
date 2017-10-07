@@ -1,15 +1,19 @@
 <template>
   <section class="section">
     <div class="container">
-      <form>
+      <form v-on:submit.prevent autocomplete="off">
         <div class="field">
           <label for="email" class="label">Email</label>
           <div class="control">
             <input
               type="email"
               v-model.trim="credentials.email"
+              @input="$v.credentials.email.$touch()"
+
               class="input">
           </div>
+          <p class="help is-danger" v-if="$v.credentials.email.$error">Please enter a valid email address.</p>
+
         </div>
         <div class="field">
           <label for="username" class="label">Username</label>
@@ -37,7 +41,14 @@
         </div>
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-primary">Sign Up</button>
+            <button
+                id="signup-submit-button"
+                class="button is-primary"
+                @click="submit()"
+            >
+            <span v-if="pending"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></span>
+            <span v-else>Sign Up</span>
+            </button>
           </div>
           <div class="control">
             <router-link to="/" class="button is-link">Cancel</router-link>
