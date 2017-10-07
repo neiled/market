@@ -5,22 +5,27 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     "ecmaVersion": 2017,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   env: {
     browser: true,
     node: true,
-    "codeceptjs/codeceptjs": true
+    "codeceptjs/codeceptjs": true,
+    jest: true,
+    jasmine: true
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: [
     'eslint:recommended',
-    'plugin:vue/recommended' // or 'plugin:vue/base'
+    'plugin:vue/recommended', // or 'plugin:vue/base'
+    'plugin:jest/recommended'
   ],
   // required to lint *.vue files
   plugins: [
     'html',
-    'codeceptjs'
+    'codeceptjs',
+    'jest',
+    'jasmine'
   ],
   // add your custom rules here
   'rules': {

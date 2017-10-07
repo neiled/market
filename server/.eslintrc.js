@@ -5,8 +5,11 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     "ecmaVersion": 2017,
-    sourceType: 'module'
+    sourceType: 'module',
   },
+  plugins: [
+    // 'graphql'
+  ],
   env: {
     node: true,
   },
