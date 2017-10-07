@@ -82,7 +82,7 @@
 
                 try {
                     await this.$store.dispatch('user/userSignin', credentials)
-                    this.$toasted.success('Logged In')
+                    this.$toasted.success('Signed In')
                     this.credentials.username = ''
                     this.credentials.email = ''
                     this.credentials.password = ''
