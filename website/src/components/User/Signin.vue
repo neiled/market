@@ -1,3 +1,4 @@
+
 <template>
   <section class="section">
     <div class="container">
@@ -31,23 +32,15 @@
             class="input">
           </div>
         </div>
-        <div class="field">
-          <label for="password_conf" class="label">Password Confirmation</label>
-          <div class="control">
-            <input type="password"
-              v-model.trim="credentials.passwordConfirm"
-            class="input">
-          </div>
-        </div>
         <div class="field is-grouped">
           <div class="control">
             <button
-                id="signup-submit-button"
+                id="signin-submit-button"
                 class="button is-primary"
                 @click="submit()"
             >
             <span v-if="pending"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i></span>
-            <span v-else>Sign Up</span>
+            <span v-else>Sign In</span>
             </button>
           </div>
           <div class="control">
@@ -63,14 +56,13 @@
     import { required, minLength, sameAs, email } from 'vuelidate/lib/validators'
 
     export default {
-        name: 'signup',
+        name: 'Signin',
         data () {
             return {
                 credentials: {
                     username: '',
                     email: '',
-                    password: '',
-                    passwordConfirm: ''
+                    password: ''
                 },
                 pending: false
             }
@@ -81,23 +73,20 @@
 
                 this.pending = true
 
-                const { username, email, password, passwordConfirm } = this.credentials
+                const { username, email, password} = this.credentials
                 const credentials = {
                     username,
                     email,
-                    password,
-                    passwordConfirm
+                    password
                 }
 
                 try {
-                    await this.$store.dispatch('user/userSignup', credentials)
-                    this.$toasted.success('Successfully signed up. Please Sign In.')
+                    await this.$store.dispatch('user/userSignin', credentials)
+                    this.$toasted.success('Logged In')
                     this.credentials.username = ''
                     this.credentials.email = ''
                     this.credentials.password = ''
-                    this.credentials.passwordConfirm = ''
                     this.$v.$reset()
-                    this.$router.push({name: 'signin'})
                 } catch (error) {
                     this.$toasted.error('Hmm, something you entered doesn\'t seem right.')
                 } finally {
@@ -109,7 +98,6 @@
             credentials: {
                 username: {
                     required,
-                    minLength: minLength(3)
                 },
                 email: {
                     required,
@@ -117,12 +105,9 @@
                 },
                 password: {
                     required,
-                    minLength: minLength(8)
                 },
-                passwordConfirm: {
-                    sameAs: sameAs('password')
-                }
             }
         }
     }
 </script>
+

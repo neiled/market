@@ -1,8 +1,9 @@
+
 import Vue from 'vue'
 
 import { shallow } from 'vue-test-utils'
 
-import Signup from '@/components/User/Signup.vue'
+import Signin from '@/components/User/Signin.vue'
 
 import Vuex from 'vuex'
 Vue.use(Vuex)
@@ -22,30 +23,27 @@ describe('User action testing', () => {
             },
             actions: {
                 //swallow response
-                'user/userSignup': () => { return },
+                'user/userSignin': () => { return },
             }
         })
     })
 
-    it('SignUp Vue Bindings Test', () => {
-        const wrapper = shallow(Signup, { store })
+    it('Sign In Vue Bindings Test', () => {
+        const wrapper = shallow(Signin, { store })
 
         expect(wrapper.vm.credentials.username).toBe('')
         expect(wrapper.vm.credentials.email).toBe('')
         expect(wrapper.vm.credentials.password).toBe('')
-        expect(wrapper.vm.credentials.passwordConfirm).toBe('')
 
         wrapper.vm.credentials.username = 'testUsername'
         wrapper.vm.credentials.email = 'test@email.com'
         wrapper.vm.credentials.password = 'testPassword'
-        wrapper.vm.credentials.passwordConfirm = 'testPassword'
 
         expect(wrapper).toBeTruthy()
         expect(wrapper.vm.credentials.username).toBe('testUsername')
         expect(wrapper.vm.credentials.email).toBe('test@email.com')
         expect(wrapper.vm.credentials.password).toBe('testPassword')
-        expect(wrapper.vm.credentials.passwordConfirm).toBe('testPassword')
 
-        expect(wrapper.find('#signup-submit-button')).toBeTruthy()
+        expect(wrapper.find('#signin-submit-button')).toBeTruthy()
     })
 })
