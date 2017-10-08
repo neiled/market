@@ -16,15 +16,15 @@ module.exports = {
             database: process.env.DB_DATABASE + '_testing',
         },
         migrations: {
-            directory: './migrations',
+            directory: './db/migrations',
         },
         seeds: {
-            directory: './seeds/dev',
+            directory: './db/seeds/testing',
         },
     },
     development: {
         client: 'pg',
-        debug: true,
+        debug: false,
         connection: {
             host: process.env.DB_HOST,
             port: process.env.DB_PORT,
@@ -33,10 +33,10 @@ module.exports = {
             database: process.env.DB_DATABASE,
         },
         migrations: {
-            directory: './migrations',
+            directory: './db/migrations',
         },
         seeds: {
-            directory: './seeds/dev',
+            directory: './db/seeds/development',
         },
     },
     production: {
@@ -50,7 +50,7 @@ module.exports = {
             database: process.env.DB_DATABASE,
         },
         migrations: {
-            directory: './migrations',
+            directory: './db/migrations',
         },
     }
 }

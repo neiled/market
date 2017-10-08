@@ -34,11 +34,12 @@ let errorOptions = {
 }
 app.use(error(errorOptions))
 
-const serverOrigin = (process.env.WEB_URL || 'http://localhost:8080')
-const origin = {origin: serverOrigin}
+// const serverOrigin = (process.env.WEB_URL || 'http://localhost:8080')
+// const origin = {origin: serverOrigin}
 
 app.use(bodyParser({ enableTypes: ['json'] }))
-app.use(cors(origin))
+// app.use(cors(origin))
+app.use(cors({ origin: '*' }))
 app.use(session(app))
 
 app

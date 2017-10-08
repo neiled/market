@@ -8,10 +8,13 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
+    'jest'
     // 'graphql'
   ],
   env: {
     node: true,
+    mocha: true,
+    jest: true
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
   extends: 'eslint:recommended',
