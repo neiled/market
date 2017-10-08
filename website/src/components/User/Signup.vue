@@ -90,16 +90,18 @@
                 }
 
                 try {
-                    await this.$store.dispatch('user/userSignup', credentials)
-                    this.$toasted.success('Successfully signed up. Please Sign In.')
-                    this.credentials.username = ''
-                    this.credentials.email = ''
-                    this.credentials.password = ''
-                    this.credentials.passwordConfirm = ''
-                    this.$v.$reset()
-                    this.$router.push({name: 'signin'})
+                  console.log('oh hi')
+                  await this.$store.dispatch('user/userSignup', credentials)
+                  this.$toasted.success('Successfully signed up. Please Sign In.')
+                  this.credentials.username = ''
+                  this.credentials.email = ''
+                  this.credentials.password = ''
+                  this.credentials.passwordConfirm = ''
+                  this.$v.$reset()
+                  this.$router.push({name: 'signin'})
                 } catch (error) {
-                    this.$toasted.error('Hmm, something you entered doesn\'t seem right.')
+                  console.log(error)
+                  this.$toasted.error('Hmm, something you entered doesn\'t seem right.')
                 } finally {
                     this.pending = false
                 }

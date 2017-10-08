@@ -33,7 +33,7 @@ const user = {
     actions: {
         async userSignup ({ dispatch, commit, getters, rootGetters }, credentials) {
             try {
-                return await axios.post('/api/v1/user/signup', {
+                return await axios.post('/api/v1/auth/signup', {
                     username: credentials.username,
                     email: credentials.email,
                     password: credentials.password
@@ -44,7 +44,7 @@ const user = {
         },
         async userSignin ({ dispatch, commit, getters, rootGetters }, credentials) {
             try {
-                return await axios.post('/api/v1/user/signin', {
+                return await axios.post('/api/v1/auth/signin', {
                     username: credentials.username,
                     email: credentials.email,
                     password: credentials.password
