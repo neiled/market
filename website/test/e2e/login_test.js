@@ -7,7 +7,6 @@ Scenario('Should see the sign in form', (I) => {
   I.click('Sign In')
   I.seeInCurrentUrl('/signin')
   I.see('Email')
-  I.see('Username')
   I.see('Password')
 })
 
@@ -28,10 +27,8 @@ Scenario('Should see error if forget to fill in email', (I) => {
 Scenario('When I sign in I should see a logout link on the main page', (I) => {
   I.amOnPage('/')
   I.click('Sign In')
-  I.fillField('Username', 'test_username')
-  I.fillField('Email', 'test_email@example.com')
-  I.fillField('Password', 'test_password')
-  I.fillField('Password Confirmation', 'test_password')
+  I.fillField('email', 'test_email@example.com')
+  I.fillField('password', 'test_password')
   I.click('Sign In')
   I.amOnPage('/')
   I.see('Sign Out')

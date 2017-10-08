@@ -9,8 +9,8 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "unit": "./node_modules/.bin/jest",
-    "e2e": "./node_modules/.bin/codeceptjs run --config test/e2e/codecept.json",
+    "unit": "NODE_ENV=testing ./node_modules/.bin/jest",
+    "e2e": "NODE_ENV=testing ./node_modules/.bin/codeceptjs run --config test/e2e/codecept.json",
     "test": "npm run unit && npm run e2e"
   },
   "dependencies": {

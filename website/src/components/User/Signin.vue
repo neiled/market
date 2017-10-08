@@ -9,25 +9,17 @@
             <input
               type="email"
               v-model.trim="credentials.email"
+              name="email"
               @input="$v.credentials.email.$touch()"
-
               class="input">
           </div>
           <p class="help is-danger" v-if="$v.credentials.email.$error">Please enter a valid email address.</p>
-
-        </div>
-        <div class="field">
-          <label for="username" class="label">Username</label>
-          <div class="control">
-            <input type="text"
-              v-model.trim="credentials.username"
-            class="input">
-          </div>
         </div>
         <div class="field">
           <label for="password" class="label">Password</label>
           <div class="control">
             <input type="password"
+              name="password"
               v-model.trim="credentials.password"
             class="input">
           </div>
