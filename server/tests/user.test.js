@@ -22,6 +22,7 @@ afterAll(async () => {
     //After all the tests are done we're going to close our server
     //and rollback our database.
     await db.migrate.rollback()
+    await db.destroy()
 
     //This closes the app but it doesn't stop the tests in
     //Jest when done - that's why we have to --forceExit
@@ -29,13 +30,9 @@ afterAll(async () => {
     return server.close()
 })
 
-//////////
-// User //
-//////////
-
 describe('user account actions', () => {
     it('signs up a user', async () => {
-        expect.assertions(2)
+        expect.assertions(4)
 
         const response = await request.post('/api/v1/auth/signup', {
             username: 'TestUsername',
@@ -46,6 +43,8 @@ describe('user account actions', () => {
         const countOfUsers = parseInt((await db('users').count('id'))[0]['count'])
         expect(response.status).toBe(200)
         expect(countOfUsers).toBe(1)
+        expect(response.data.token).toBeDefined()
+        expect(response.data.refreshToken).toBeDefined()
     })
 
 })

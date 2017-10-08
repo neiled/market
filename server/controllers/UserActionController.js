@@ -29,6 +29,24 @@ class UserController {
         }        
     }
 
+    getRefreshToken(email) {
+        let refreshTokenData = {
+            username: email,
+            refreshToken: uuid(),
+            expiration: dateAddMonths(new Date(), 1),
+        }
+        return refreshTokenData
+    }
+
+    getToken(email) {
+        const token = jsonwebtoken.sign(
+            { data: email },
+            process.env.JWT_SECRET,
+            { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME }
+        )
+        return token
+    }
+
     async new_user(ctx) {
         //First let's save off the ctx.request.body. Throughout this project
         //we're going to try and avoid using the ctx.request.body and instead use
@@ -42,12 +60,18 @@ class UserController {
             ctx.throw(400, 'INVALID_DATA')
         }
 
+        request['token'] = this.getRefreshToken(request.email)
+
         try {
             var [result] = await db('users')
                 .insert(request)
                 .returning('id')
 
-            ctx.body = { status: 200, id: result }
+            ctx.body = {
+                status: 200,
+                token: this.getToken(request),
+                refreshToken: request.token
+            }
         } catch (error) {
             console.log(error)
             ctx.throw(400, 'INVALID_DATA')

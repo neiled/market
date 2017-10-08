@@ -2,6 +2,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('users', function(t) {
         t.increments('id').unsigned().primary()
+        t.string('token').notNullable()
         t.dateTime('createdAt').defaultTo(knex.fn.now())
         t.dateTime('updatedAt').nullable()
         t.dateTime('deletedAt').nullable()
