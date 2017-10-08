@@ -4,6 +4,8 @@ if (!process.env.NODE_ENV) { throw new Error('NODE_ENV not set') }
 
 require('dotenv').config()
 
+console.log(process.env.DB_USER)
+console.log(process.env.DB_DATABASE)
 
 module.exports = {
     testing: {
