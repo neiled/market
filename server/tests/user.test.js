@@ -35,14 +35,17 @@ afterAll(async () => {
 
 describe('user account actions', () => {
     it('signs up a user', async () => {
-        expect.assertions(1)
+        expect.assertions(2)
 
         const response = await request.post('/api/v1/auth/signup', {
             username: 'TestUsername',
             email: 'TestEmail@example.com',
             password: 'TestPassword',
         })
+
+        const countOfUsers = parseInt((await db('users').count('id'))[0]['count'])
         expect(response.status).toBe(200)
+        expect(countOfUsers).toBe(1)
     })
 
 })

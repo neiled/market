@@ -4,7 +4,7 @@
   "description": "An incremental game - api server",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=testing ./node_modules/.bin/jest",
+    "test": "NODE_ENV=testing ./node_modules/.bin/jest --forceExit",
     "dev": "NODE_ENV=development nodemon server.js --exec ./node_modules/.bin/babel-node"
   },
   "author": "Neil Edwards",
