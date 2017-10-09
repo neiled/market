@@ -10,6 +10,7 @@ axios.defaults.baseURL = process.env.API_URL
 const SET_USER = 'SET_USER'
 const STORE_ACCESS_TOKEN = 'STORE_ACCESS_TOKEN'
 const STORE_REFRESH_TOKEN = 'STORE_REFRESH_TOKEN'
+const LOGOUT_USER = 'LOGOUT_USER'
 
 const user = {
     namespaced: true,
@@ -30,6 +31,13 @@ const user = {
             state.refreshToken = refreshToken
             localStorage.setItem('refreshToken', refreshToken)
         },
+        LOGOUT_USER(state) {
+          state.user = null
+          state.token = null
+          state.refreshToken = null
+          localStorage.removeItem('token')
+          localStorage.removeItem('refreshToken')
+        }
     },
     getters: {
         user (state) {
@@ -71,7 +79,14 @@ const user = {
             } catch (error) {
                 throw new Error(error)
             }
-        }
+        },
+        async userLogout ({ commit }) {
+          try {
+              commit(LOGOUT_USER)
+          } catch (error) {
+              throw new Error(error)
+          }
+      },
     }
 }
 

@@ -12,8 +12,8 @@
         "browserName": "chrome",
         "chromeOptions": {
             "args": [
-                "headless",
-                "disable-gpu"
+              "headless",
+              "disable-gpu"
             ]
         }
       }
