@@ -28,6 +28,6 @@ Scenario('Should see error if forget to fill in email', (I) => {
 })
 
 Scenario('Should store a token after signing up', (I) => {
-  I.signup('test@example.com', 'test_user')
+  I.signup('token_test_email@example.com', 'token_test_username', 'token_test_password')
   I.seeElement('#sign_out_button')
 })

@@ -2,6 +2,9 @@
 <template>
   <section class="section">
     <div class="container">
+      <div class="notification is-warning" v-if="error">
+        {{ error }}
+      </div>
       <form v-on:submit.prevent autocomplete="off">
         <div class="field">
           <label for="email" class="label">Email</label>
@@ -55,13 +58,15 @@
                     email: '',
                     password: ''
                 },
-                pending: false
+                pending: false,
+                error: null
             }
         },
         methods: {
             async submit () {
                 if (this.$v.$invalid) { this.$v.$touch(); return }
 
+                this.error = null
                 this.pending = true
 
                 const { email, password} = this.credentials
@@ -78,7 +83,7 @@
                   this.$v.$reset()
                   this.$router.push({name: '/'})
                 } catch (error) {
-                    this.$toasted.error('Hmm, something you entered doesn\'t seem right.')
+                  this.error = 'Incorrect email and/or password'
                 } finally {
                     this.pending = false
                 }
