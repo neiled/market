@@ -45,7 +45,6 @@ class UserController {
                     ctx.throw(422, 'INVALID_CREDENTIALS')
                 }
             } catch (error) {
-                console.log(error)
                 ctx.throw(422, 'INVALID_DATA')
             }
         }
@@ -61,12 +60,33 @@ class UserController {
         //we're going to try and avoid using the ctx.request.body and instead use
         //our own object that is seeded by the ctx.request.body initially
         const request = ctx.request.body
+
+        //Now let's check for a duplicate username
+        var [result] = await db('users')
+        .where({
+            username: request.username,
+        })
+        .count('id as id')
+
+        if (result.id > 0) {
+            ctx.throw(422, 'DUPLICATE_USERNAME')
+        }
+
+        //..and duplicate email
+        [result] = await db('users')
+            .where({
+                email: request.email,
+            })
+            .count('id as id')
+        if (result.id > 0) {
+            ctx.throw(422, 'DUPLICATE_EMAIL')
+        }
+
     
         try {
             request.password = await bcrypt.hash(request.password, 12)
         } catch (error) {
-            console.log(error)
-            ctx.throw(400, 'INVALID_DATA')
+            ctx.throw(422, 'INVALID_DATA')
         }
 
         request['token'] = this.getRefreshToken(request.email)
@@ -82,7 +102,6 @@ class UserController {
                 refreshToken: request.token
             }
         } catch (error) {
-            console.log(error)
             ctx.throw(400, 'INVALID_DATA')
         }
     }
