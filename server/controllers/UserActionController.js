@@ -27,7 +27,6 @@ class UserController {
 
     async authenticate(ctx) {
         //at this point it should check the user is valid
-        console.log(ctx)
         const request = ctx.request.body
 
         ctx.body = {
@@ -53,7 +52,7 @@ class UserController {
         request['token'] = this.getRefreshToken(request.email)
 
         try {
-            var [result] = await db('users')
+            await db('users')
                 .insert(request)
                 .returning('id')
 

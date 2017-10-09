@@ -6,7 +6,8 @@ import { server } from '../server'
 
 //Set up axios a little bit
 import axios from 'axios'
-const url = 'http://localhost:3000'
+const port = process.env.PORT || 3000
+const url = 'http://localhost:'+port
 const request = axios.create({ baseURL: url })
 
 //Grab the db variable
@@ -43,6 +44,20 @@ describe('user account actions', () => {
         const countOfUsers = parseInt((await db('users').count('id'))[0]['count'])
         expect(response.status).toBe(200)
         expect(countOfUsers).toBe(1)
+        expect(response.data.token).toBeDefined()
+        expect(response.data.refreshToken).toBeDefined()
+    })
+
+    it('signs in a user', async () => {
+        expect.assertions(3)
+
+        const response = await request.post('/api/v1/auth/signin', {
+            username: 'TestUsername',
+            email: 'TestEmail@example.com',
+            password: 'TestPassword',
+        })
+
+        expect(response.status).toBe(200)
         expect(response.data.token).toBeDefined()
         expect(response.data.refreshToken).toBeDefined()
     })

@@ -31,16 +31,13 @@ describe('User action testing', () => {
     it('Sign In Vue Bindings Test', () => {
         const wrapper = shallow(Signin, { store })
 
-        expect(wrapper.vm.credentials.username).toBe('')
         expect(wrapper.vm.credentials.email).toBe('')
         expect(wrapper.vm.credentials.password).toBe('')
 
-        wrapper.vm.credentials.username = 'testUsername'
         wrapper.vm.credentials.email = 'test@email.com'
         wrapper.vm.credentials.password = 'testPassword'
 
         expect(wrapper).toBeTruthy()
-        expect(wrapper.vm.credentials.username).toBe('testUsername')
         expect(wrapper.vm.credentials.email).toBe('test@email.com')
         expect(wrapper.vm.credentials.password).toBe('testPassword')
 
