@@ -30,6 +30,5 @@ Scenario('When I sign in I should see a logout link on the main page', (I) => {
   I.fillField('email', 'test_email@example.com')
   I.fillField('password', 'test_password')
   I.click('Sign In')
-  I.amOnPage('/')
-  I.see('Sign Out')
+  I.seeElement('#sign_out_button')
 })

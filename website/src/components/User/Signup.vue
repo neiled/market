@@ -7,6 +7,7 @@
           <div class="control">
             <input
               type="email"
+              name="email"
               v-model.trim="credentials.email"
               @input="$v.credentials.email.$touch()"
 
@@ -19,6 +20,7 @@
           <label for="username" class="label">Username</label>
           <div class="control">
             <input type="text"
+              name="username"
               v-model.trim="credentials.username"
             class="input">
           </div>
@@ -27,6 +29,7 @@
           <label for="password" class="label">Password</label>
           <div class="control">
             <input type="password"
+              name="password"
               v-model.trim="credentials.password"
             class="input">
           </div>
@@ -35,6 +38,7 @@
           <label for="password_conf" class="label">Password Confirmation</label>
           <div class="control">
             <input type="password"
+              name="password_confirmation"
               v-model.trim="credentials.passwordConfirm"
             class="input">
           </div>
@@ -90,7 +94,6 @@
                 }
 
                 try {
-                  console.log('oh hi')
                   await this.$store.dispatch('user/userSignup', credentials)
                   this.$toasted.success('Successfully signed up. Please Sign In.')
                   this.credentials.username = ''

@@ -45,14 +45,13 @@
 </template>
 
 <script>
-    import { required, minLength, sameAs, email } from 'vuelidate/lib/validators'
+    import { required, email } from 'vuelidate/lib/validators'
 
     export default {
         name: 'Signin',
         data () {
             return {
                 credentials: {
-                    username: '',
                     email: '',
                     password: ''
                 },
@@ -65,20 +64,19 @@
 
                 this.pending = true
 
-                const { username, email, password} = this.credentials
+                const { email, password} = this.credentials
                 const credentials = {
-                    username,
                     email,
                     password
                 }
 
                 try {
-                    await this.$store.dispatch('user/userSignin', credentials)
-                    this.$toasted.success('Signed In')
-                    this.credentials.username = ''
-                    this.credentials.email = ''
-                    this.credentials.password = ''
-                    this.$v.$reset()
+                  await this.$store.dispatch('user/userSignin', credentials)
+                  this.$toasted.success('Signed In')
+                  this.credentials.email = ''
+                  this.credentials.password = ''
+                  this.$v.$reset()
+                  this.$router.push({name: '/'})
                 } catch (error) {
                     this.$toasted.error('Hmm, something you entered doesn\'t seem right.')
                 } finally {
@@ -88,9 +86,6 @@
         },
         validations: {
             credentials: {
-                username: {
-                    required,
-                },
                 email: {
                     required,
                     email

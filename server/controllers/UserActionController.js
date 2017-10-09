@@ -7,28 +7,6 @@ import db from '../db/db'
 class UserController {
     constructor() {}
 
-    async authenticate(ctx) {
-        
-        //at this point it should check the user is valid
-        console.log(ctx)
-
-        let refreshTokenData = {
-            username: 'username',
-            refreshToken: uuid(),
-            expiration: dateAddMonths(new Date(), 1),
-        }
-
-        const token = jsonwebtoken.sign(
-            { data: 'userData' },
-            process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME }
-        )
-        ctx.body = {
-            accessToken: token,
-            refreshToken: refreshTokenData.refreshToken,
-        }        
-    }
-
     getRefreshToken(email) {
         let refreshTokenData = {
             username: email,
@@ -45,6 +23,18 @@ class UserController {
             { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME }
         )
         return token
+    }
+
+    async authenticate(ctx) {
+        //at this point it should check the user is valid
+        console.log(ctx)
+        const request = ctx.request.body
+
+        ctx.body = {
+            status: 200,
+            token: this.getToken(request),
+            refreshToken: this.getRefreshToken(request.email)
+        }        
     }
 
     async new_user(ctx) {

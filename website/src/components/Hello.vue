@@ -11,6 +11,7 @@
     <section>
       <router-link class="button" to="/signup">Sign Up</router-link>
       <router-link class="button" to="/signin">Sign In</router-link>
+      <router-link id="sign_out_button" v-if="user" class="button" to="/#">Sign Out</router-link>
     </section>
   </div>
 </section>
@@ -22,6 +23,11 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user.user
     }
   }
 }

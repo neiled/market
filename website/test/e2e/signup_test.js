@@ -1,3 +1,5 @@
+const assert = require('assert')
+
 
 Feature('Sign Up')
 
@@ -23,4 +25,9 @@ Scenario('Should see error if forget to fill in email', (I) => {
   I.click('Sign Up')
   I.click('Sign Up')
   I.see('Please enter a valid email address.')
+})
+
+Scenario('Should store a token after signing up', (I) => {
+  I.signup('test@example.com', 'test_user')
+  I.seeElement('#sign_out_button')
 })
