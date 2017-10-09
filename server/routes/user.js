@@ -8,7 +8,7 @@ router.post('/signin', async function (ctx) {
 })
 
 router.post('/signup', async function (ctx) {
-  await userController.new_user(ctx)
+  await userController.newUser(ctx)
 })
 
 router.get('/test', async function (ctx) {

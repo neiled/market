@@ -29,14 +29,34 @@ class UserController {
         //at this point it should check the user is valid
         const request = ctx.request.body
 
+        const foundUsers = await this.findUser(request.email)
+        if (!foundUsers || !foundUsers[0]) {
+            ctx.throw(422, 'INVALID_CREDENTIALS')
+        }
+        else {
+            const foundUser = foundUsers[0]
+
+            try {
+                let correct = await bcrypt.compare(
+                    request.password,
+                    foundUser.password
+                )
+                if (!correct) {
+                    ctx.throw(422, 'INVALID_CREDENTIALS')
+                }
+            } catch (error) {
+                console.log(error)
+                ctx.throw(422, 'INVALID_DATA')
+            }
+        }
+
+        ctx.status = 200
         ctx.body = {
-            status: 200,
             token: this.getToken(request),
             refreshToken: this.getRefreshToken(request.email)
         }        
     }
-
-    async new_user(ctx) {
+    async newUser(ctx) {
         //First let's save off the ctx.request.body. Throughout this project
         //we're going to try and avoid using the ctx.request.body and instead use
         //our own object that is seeded by the ctx.request.body initially
@@ -56,8 +76,8 @@ class UserController {
                 .insert(request)
                 .returning('id')
 
+            ctx.status = 200
             ctx.body = {
-                status: 200,
                 token: this.getToken(request),
                 refreshToken: request.token
             }
@@ -65,6 +85,11 @@ class UserController {
             console.log(error)
             ctx.throw(400, 'INVALID_DATA')
         }
+    }
+
+    async findUser(email) {
+        const user = await db('users').where('email', email)
+        return user
     }
 }
 

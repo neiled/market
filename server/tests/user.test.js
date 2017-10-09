@@ -8,7 +8,7 @@ import { server } from '../server'
 import axios from 'axios'
 const port = process.env.PORT || 3000
 const url = 'http://localhost:'+port
-const request = axios.create({ baseURL: url })
+const request = axios.create({ baseURL: url, validateStatus: false })
 
 //Grab the db variable
 import db from '../db/db'
@@ -17,6 +17,7 @@ beforeAll(async () => {
     //As the tests start rollback and migrate our tables
     await db.migrate.rollback()
     await db.migrate.latest()
+    await db.seed.run()
 })
 
 afterAll(async () => {
@@ -41,25 +42,39 @@ describe('user account actions', () => {
             password: 'TestPassword',
         })
 
-        const countOfUsers = parseInt((await db('users').count('id'))[0]['count'])
+        const countOfUsers = parseInt((await db('users').where('username', 'TestUsername').count('id'))[0]['count'])
         expect(response.status).toBe(200)
         expect(countOfUsers).toBe(1)
         expect(response.data.token).toBeDefined()
         expect(response.data.refreshToken).toBeDefined()
     })
 
-    it('signs in a user', async () => {
+    it('signs in a user with correct password', async () => {
         expect.assertions(3)
 
         const response = await request.post('/api/v1/auth/signin', {
-            username: 'TestUsername',
-            email: 'TestEmail@example.com',
-            password: 'TestPassword',
+            username: 'test_user',
+            email: 'test_email@example.com',
+            password: 'secret',
         })
 
         expect(response.status).toBe(200)
         expect(response.data.token).toBeDefined()
         expect(response.data.refreshToken).toBeDefined()
+    })
+
+    it('does not sign in a user with incorrect password', async () => {
+        expect.assertions(3)
+
+        const response = await request.post('/api/v1/auth/signin', {
+            username: 'test_user',
+            email: 'test_email@example.com',
+            password: 'WrongPassword',
+        })
+
+        expect(response.status).toBe(422)
+        expect(response.data.token).toBeUndefined()
+        expect(response.data.refreshToken).toBeUndefined()
     })
 
 })

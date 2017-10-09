@@ -9,8 +9,8 @@
       </div>
     </section>
     <section>
-      <router-link class="button" to="/signup">Sign Up</router-link>
-      <router-link class="button" to="/signin">Sign In</router-link>
+      <router-link v-if="!user" class="button" to="/signup">Sign Up</router-link>
+      <router-link v-if="!user" class="button" to="/signin">Sign In</router-link>
       <a id="sign_out_button" v-if="user" v-on:click="logout()" class="button" to="#">Sign Out</a>
     </section>
   </div>
