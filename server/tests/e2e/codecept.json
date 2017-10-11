@@ -2,17 +2,18 @@
   "tests": "./*_test.js",
   "timeout": 10000,
   "output": "./output",
-  "bootstrap": "./setup_tests.js",
   "helpers": {
     "AuthHelper": { "require": "./auth_helper.js"},
     "WebDriverIO": {
       "smartWait": 5000,
-      "url": "http://localhost:8080",
+      "url": "http://localhost:8081",
       "browser": "chrome",
       "desiredCapabilities": {
         "browserName": "chrome",
         "chromeOptions": {
             "args": [
+              "headless",
+              "disablegpu"
             ]
         }
       }
@@ -21,7 +22,8 @@
   "include": {
     "I": "./steps_file.js"
   },
-  "bootstrap": false,
+  "bootstrap": "./setup_tests.js",
+  "teardown": "./cleanup_tests.js",
   "mocha": {},
   "name": "e2e"
 }

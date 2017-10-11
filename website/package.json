@@ -5,7 +5,8 @@
   "author": "Neil Edwards <neil@plasticwater.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "server-dev": "node build/dev-server.js",
+    "server-test": "NODE_ENV=testing PORT=8081 API_URL=\"http://localhost:4000\" node build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",

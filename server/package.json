@@ -4,9 +4,12 @@
   "description": "An incremental game - api server",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=testing PORT=4000 ./node_modules/.bin/jest",
-    "test-watch": "NODE_ENV=testing PORT=4000 ./node_modules/.bin/jest --watch --notify",
-    "dev": "NODE_ENV=development nodemon server.js --exec ./node_modules/.bin/babel-node"
+    "unit": "NODE_ENV=testing PORT=4000 ./node_modules/.bin/jest",
+    "e2e": "NODE_ENV=testing ./node_modules/.bin/codeceptjs run --config tests/e2e/codecept.json",
+    "test": "npm run unit && npm run e2e",
+    "unit-watch": "NODE_ENV=testing PORT=4000 ./node_modules/.bin/jest --watch --notify",
+    "server-dev": "NODE_ENV=development nodemon server.js --exec ./node_modules/.bin/babel-node",
+    "server-test": "NODE_ENV=testing PORT=4000 nodemon server.js --exec ./node_modules/.bin/babel-node"
   },
   "author": "Neil Edwards",
   "license": "ISC",
@@ -37,6 +40,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "codeceptjs-webdriverio": "^1.1.0",
     "eslint": "^4.8.0",
     "eslint-plugin-graphql": "^1.4.0-1",
     "eslint-plugin-jest": "^21.2.0",

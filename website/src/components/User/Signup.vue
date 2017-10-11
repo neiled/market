@@ -95,13 +95,13 @@
 
                 try {
                   await this.$store.dispatch('user/userSignup', credentials)
-                  this.$toasted.success('Successfully signed up. Please Sign In.')
+                  this.$toasted.success('Successfully signed up')
                   this.credentials.username = ''
                   this.credentials.email = ''
                   this.credentials.password = ''
                   this.credentials.passwordConfirm = ''
                   this.$v.$reset()
-                  this.$router.push({name: 'signin'})
+                  this.$router.push({name: '/'})
                 } catch (error) {
                   console.log(error)
                   this.$toasted.error('Hmm, something you entered doesn\'t seem right.')
