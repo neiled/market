@@ -37,6 +37,9 @@ Scenario('When I sign in and then sign out I should not see a logout link', (I) 
   I.click('Sign Out')
   I.dontSee('Sign Out')
   I.see('Sign In')
+  I.amOnPage('/')
+  I.dontSee('Sign Out')
+  I.see('Sign In')
 })
 
 Scenario('When I sign in with the wrong password it should fail', (I) => {
