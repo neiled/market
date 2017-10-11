@@ -17,6 +17,13 @@ Vue.use(Vuelidate)
 
 Vue.config.productionTip = false
 
+let accessToken = localStorage.getItem('token') ? localStorage.getItem('token') : null
+let refreshToken = localStorage.getItem('refreshToken') ? localStorage.getItem('refreshToken') : null
+
+if (accessToken) {
+  store.dispatch('user/setUserAndTokens', {token: accessToken, refreshToken: refreshToken})
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -60,3 +60,11 @@ Scenario('When I sign in with the wrong password it should fail', (I) => {
   I.dontSeeElement('#sign_out_button')
   I.see('Incorrect email and/or password')
 })
+
+Scenario('When I refresh the page my login status is still remembered', (I) => {
+  I.signup('test_email_refresh@example.com', 'test_username_refresh', 'test_password')
+  // I.amOnPage('/')
+  I.seeElement('#sign_out_button')
+  I.amOnPage('/')
+  I.seeElement('#sign_out_button')
+})
