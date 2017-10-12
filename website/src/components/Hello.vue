@@ -9,15 +9,15 @@
       </div>
     </section>
     <section>
-      <router-link v-if="!user" class="button" to="/signup">Sign Up</router-link>
-      <router-link v-if="!user" class="button" to="/signin">Sign In</router-link>
-      <a id="sign_out_button" v-if="user" v-on:click="logout()" class="button" to="#">Sign Out</a>
+      <NavigationBar />
     </section>
   </div>
 </section>
 </template>
 
 <script>
+import NavigationBar from '@/components/generic/NavigationBar'
+
 export default {
   name: 'hello',
   data () {
@@ -31,10 +31,9 @@ export default {
     }
   },
   methods: {
-    async logout() {
-      this.$toasted.success('Signed Out')
-      await this.$store.dispatch('user/userLogout')
-    }
+  },
+  components: {
+    NavigationBar
   }
 }
 </script>

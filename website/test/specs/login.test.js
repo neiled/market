@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 
 import { shallow } from 'vue-test-utils'
@@ -41,6 +40,6 @@ describe('User action testing', () => {
         expect(wrapper.vm.credentials.email).toBe('test@email.com')
         expect(wrapper.vm.credentials.password).toBe('testPassword')
 
-        expect(wrapper.find('#signin-submit-button')).toBeTruthy()
+        expect(wrapper.find('#signin-submit-button').exists()).toBeTruthy()
     })
 })

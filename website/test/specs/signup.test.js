@@ -46,6 +46,6 @@ describe('User action testing', () => {
         expect(wrapper.vm.credentials.password).toBe('testPassword')
         expect(wrapper.vm.credentials.passwordConfirm).toBe('testPassword')
 
-        expect(wrapper.find('#signup-submit-button')).toBeTruthy()
+        expect(wrapper.find('#signup-submit-button').exists()).toBeTruthy()
     })
 })

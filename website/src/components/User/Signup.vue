@@ -101,7 +101,7 @@
                   this.credentials.password = ''
                   this.credentials.passwordConfirm = ''
                   this.$v.$reset()
-                  this.$router.push({name: '/'})
+                  this.$router.push({name: 'Hello'})
                 } catch (error) {
                   console.log(error)
                   this.$toasted.error('Hmm, something you entered doesn\'t seem right.')

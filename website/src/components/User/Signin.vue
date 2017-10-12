@@ -81,7 +81,7 @@
                   this.credentials.email = ''
                   this.credentials.password = ''
                   this.$v.$reset()
-                  this.$router.push({name: '/'})
+                  this.$router.push({name: 'Hello'})
                 } catch (error) {
                   this.error = 'Incorrect email and/or password'
                 } finally {
