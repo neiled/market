@@ -16,18 +16,13 @@
 </template>
 
 <script>
-import NavigationBar from '@/components/generic/NavigationBar'
+import NavigationBar from '@/components/Generic/NavigationBar'
 
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  computed: {
-    user() {
-      return this.$store.state.user.user
     }
   },
   methods: {

@@ -58,3 +58,4 @@ typings/
 .env
 
 website/test/e2e/output
+server/tests/e2e/output
