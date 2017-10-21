@@ -2,7 +2,7 @@
 if (process.env.NODE_ENV !== 'testing') { throw new Error('NODE_ENV not set') }
 
 //This starts the app up
-import { server } from '../server'
+import { server } from '../../server'
 
 //Set up axios a little bit
 import axios from 'axios'
@@ -11,7 +11,7 @@ const url = 'http://localhost:'+port
 const request = axios.create({ baseURL: url, validateStatus: false })
 
 //Grab the db variable
-import db from '../db/db'
+import db from '../../db/db'
 
 beforeAll(async () => {
     //As the tests start rollback and migrate our tables

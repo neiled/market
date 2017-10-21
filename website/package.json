@@ -12,8 +12,7 @@
     "lint": "eslint --ext .js,.vue src",
     "unit": "NODE_ENV=testing ./node_modules/.bin/jest",
     "unit-watch": "NODE_ENV=testing ./node_modules/.bin/jest --watch",
-    "e2e": "NODE_ENV=testing ./node_modules/.bin/codeceptjs run --config test/e2e/codecept.json",
-    "test": "npm run unit && npm run e2e"
+    "test": "npm run unit"
   },
   "dependencies": {
     "axios": "^0.16.2",
