@@ -9,7 +9,8 @@
     "test": "npm run unit && npm run e2e",
     "unit-watch": "NODE_ENV=testing PORT=4000 ./node_modules/.bin/jest --watch --notify",
     "server-dev": "NODE_ENV=development nodemon server.js --exec ./node_modules/.bin/babel-node",
-    "server-test": "NODE_ENV=testing PORT=4000 nodemon server.js --exec ./node_modules/.bin/babel-node"
+    "server-test": "NODE_ENV=testing PORT=4000 nodemon server.js --exec ./node_modules/.bin/babel-node",
+    "migrate-dev": "NODE_ENV=development ./node_modules/.bin/knex migrate:latest"
   },
   "author": "Neil Edwards",
   "license": "ISC",

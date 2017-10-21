@@ -45,6 +45,7 @@ class UserController {
                     ctx.throw(422, 'INVALID_CREDENTIALS')
                 }
             } catch (error) {
+                console.error(error)
                 ctx.throw(422, 'INVALID_DATA')
             }
         }
@@ -86,6 +87,7 @@ class UserController {
         try {
             request.password = await bcrypt.hash(request.password, 12)
         } catch (error) {
+            console.error(error)
             ctx.throw(422, 'INVALID_DATA')
         }
 
@@ -102,6 +104,7 @@ class UserController {
                 refreshToken: request.token
             }
         } catch (error) {
+            console.error(error)
             ctx.throw(400, 'INVALID_DATA')
         }
     }
