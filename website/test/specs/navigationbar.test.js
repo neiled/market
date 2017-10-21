@@ -45,4 +45,11 @@ describe('User action testing', () => {
       wrapper.update()
       expect(wrapper.find('#signout-link').exists()).toBeTruthy()
     })
+
+    it('Should show the home button if the user is logged in', () => {
+      const wrapper = shallow(NavBar, {store})
+      store.state.user = {user: true}
+      wrapper.update()
+      expect(wrapper.find('#home-link').exists()).toBeTruthy()
+    })
 })

@@ -2,6 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <router-link id="signup-link" v-if="!user" class="navbar-item" to="/signup">Sign Up</router-link>
     <router-link id="signin-link" v-if="!user" class="navbar-item" to="/signin">Sign In</router-link>
+    <router-link id="home-link" v-if="user" class="navbar-item" to="/home">Home</router-link>
     <a id="signout-link" v-if="user" v-on:click="logout()" class="navbar-item" to="#">Sign Out</a>
   </nav>
 </template>
