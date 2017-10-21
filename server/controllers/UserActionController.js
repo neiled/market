@@ -113,6 +113,12 @@ class UserController {
         const user = await db('users').where('email', email)
         return user
     }
+    
+    async getUser(ctx) {
+        const user = await this.findUser(ctx.state.user.data.email)
+        const returnUser = (({ username, email }) => ({ username, email }))(user[0])
+        ctx.body = { user: returnUser}
+    }
 }
 
 export default UserController

@@ -5,6 +5,7 @@ import cors from 'kcors'
 import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
 import error from 'koa-json-error'
+import authRouter from './routes/auth'
 import userRouter from './routes/user'
 
 app.use(async (ctx, next) => {
@@ -43,12 +44,28 @@ app.use(cors({ origin: '*' }))
 app.use(session(app))
 
 app
+  .use(authRouter.routes())
+  .use(authRouter.allowedMethods())
+
+
+app.use(function (ctx, next) {
+    return next().catch((err) => {
+        if (err.status === 401) {
+            console.log('oh hai')
+            ctx.status = 401
+            ctx.body = {
+                error: err.originalError ? err.originalError.message : err.message
+            }
+        } else {
+            throw err
+        }
+    })
+})
+
+app.use(jwt({ secret: process.env.JWT_SECRET}))
+
+app
   .use(userRouter.routes())
   .use(userRouter.allowedMethods())
-
-
-// Middleware below this line is only reached if JWT token is valid
-app.use(jwt({ secret: process.env.JWT_SECRET }))
-
 
 export default app

@@ -128,4 +128,18 @@ describe('user account actions', () => {
         expect(response.data.refreshToken).toBeUndefined()
     })
 
+    it('retrieves the current users information', async () => {
+        const response = await request.post('/api/v1/auth/signup', {
+            username: 'RetrieveUser',
+            email: 'RetrieveUser@example.com',
+            password: 'TestPassword',
+        })
+        expect.assertions(1)
+        const token = response.data.token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+
+        const responseGet = await request.get('/api/v1/user/test')
+        expect(responseGet.data.user.email).toBe('RetrieveUser@example.com')
+    })
+
 })

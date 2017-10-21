@@ -47,5 +47,8 @@
     "eslint-plugin-vue": "^2.1.0",
     "faker": "^4.1.0",
     "jest": "^21.2.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./tests/api/setup.js"
   }
 }
